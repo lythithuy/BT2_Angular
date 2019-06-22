@@ -1,0 +1,37 @@
+<h1>Bài tập structural directive - CYBERSOFT</h1>
+<div>
+  <h4 style=" background-color: black; color:white" class="py-3">Quản lý danh mục sản phẩm</h4>
+</div>
+<div >
+  <input type="text" placeholder="MaSP" style="margin-right: 30px" #MaSP>  
+  <input type="text" placeholder="TenSP" style="margin-right: 30px" #TenSP>
+  <input type="text" placeholder="Gia" style="margin-right: 30px" #Gia>
+  <button class="btn btn-success" (click)="themSP(MaSP.value, TenSP.value, Gia.value)">Thêm sản phẩm</button>
+</div>
+
+<br>
+<br>
+  
+<div>
+  <h4 style=" background-color: black; color:white" class="py-3">Danh mục sản phẩm</h4>
+</div>
+<table class="table table-light">
+  <thead class="thead-light">
+    <tr>
+      <th>Mã SP</th>
+      <th>Tên SP</th>
+      <th>Giá</th>
+      <th>setting</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of mangSP | paginate:{itemsPerPage: 6, currentPage:p}"
+          [ngClass]="{'bgcolor': item.MaSP%2 !== 0}">
+      <td>{{item.MaSP}}</td>
+      <td>{{item.TenSP}}</td>
+      <td>{{item.Gia}}</td>
+      <td><button class="btn btn-danger" (click)="xoaSP(item.MaSP)">Xóa</button></td>
+    </tr>
+  </tbody>
+  <tfoot><pagination-controls (pageChange)="p=$event"></pagination-controls></tfoot>
+</table>
